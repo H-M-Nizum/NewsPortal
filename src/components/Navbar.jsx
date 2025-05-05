@@ -1,7 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router";
 import userIcon from "../assets/bg-remove-user.png";
+import { AuthContext } from "../provider/AuthProvider";
+
 const Navbar = () => {
+  const { user } = useContext(AuthContext);
+  console.log(user);
   return (
     <div className="flex justify-between">
       <div className=""></div>

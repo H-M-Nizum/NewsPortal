@@ -9,7 +9,6 @@ const LoginPage = () => {
             <h2 className="text-2xl font-semibold text-center py-4 pt-6">
               Login Your Account
             </h2>
-            {/* <hr className="text-gray-200 text-4xl" /> */}
           </div>
           <hr className="border-t-2 border-gray-200 py-4" />
           <form className="fieldset">
