@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router";
-import userIcon from "../assets/user.png";
+import userIcon from "../assets/bg-remove-user.png";
 const Navbar = () => {
   return (
     <div className="flex justify-between">
@@ -14,7 +14,9 @@ const Navbar = () => {
         <div className="">
           <img src={userIcon} alt="userIcon" />
         </div>
-        <button className="btn btn-neutral rounded-none">Login</button>
+        <Link to={"/auth/login"} className="btn btn-neutral rounded-none">
+          Login
+        </Link>
       </div>
     </div>
   );
