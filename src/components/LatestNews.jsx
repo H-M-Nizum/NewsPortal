@@ -9,11 +9,8 @@ const LatestNews = () => {
       <Marquee className="space-x-10" pauseOnHover={true}>
         <Link to="/news">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita,
-          pariatur?
-        </Link>
-        <Link to="/news">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita,
-          pariatur?
+          pariatur? Lorem ipsum dolor sit amet consectetur adipisicing elit.
+          Illo, ab?
         </Link>
       </Marquee>
     </div>
