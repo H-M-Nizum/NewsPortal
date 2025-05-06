@@ -4,8 +4,17 @@ import userIcon from "../assets/bg-remove-user.png";
 import { AuthContext } from "../provider/AuthProvider";
 
 const Navbar = () => {
-  const { user } = useContext(AuthContext);
+  const { user, signoutUser } = useContext(AuthContext);
   console.log(user);
+  const handelSignout = () => {
+    signoutUser()
+      .then(() => {
+        console.log("Signout successful");
+      })
+      .catch((error) => {
+        console.error("Error signing out:", error);
+      });
+  };
   return (
     <div className="flex justify-between">
       <div className=""></div>
@@ -18,9 +27,15 @@ const Navbar = () => {
         <div className="">
           <img src={userIcon} alt="userIcon" />
         </div>
-        <Link to={"/auth/login"} className="btn btn-neutral rounded-md">
-          Login
-        </Link>
+        {user ? (
+          <button onClick={handelSignout} className="btn btn-error">
+            Signout
+          </button>
+        ) : (
+          <Link to={"/auth/login"} className="btn btn-neutral rounded-md">
+            Login
+          </Link>
+        )}
       </div>
     </div>
   );
