@@ -12,7 +12,7 @@ import { auth } from "../firebace/firebase.config";
 export const AuthContext = createContext(null);
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-
+  const [loading, setLoading] = useState(true);
   // Function for Signup using email and password
   const createUser = (email, password) => {
     return createUserWithEmailAndPassword(auth, email, password);
@@ -34,6 +34,7 @@ const AuthProvider = ({ children }) => {
     createUser,
     signUser,
     signoutUser,
+    loading,
   };
 
   // Create observer for auth state change
@@ -41,6 +42,7 @@ const AuthProvider = ({ children }) => {
     const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
       console.log("User state changed", currentUser);
+      setLoading(false); // Set loading to false when the auth state changes
     });
 
     return () => {
