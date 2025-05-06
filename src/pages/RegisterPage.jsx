@@ -3,7 +3,7 @@ import { AuthContext } from "../provider/AuthProvider";
 import { useNavigate } from "react-router";
 
 const RegisterPage = () => {
-  const { createUser, setUser } = useContext(AuthContext);
+  const { createUser, setUser, updateUserProfile } = useContext(AuthContext);
   // Show error message
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -31,7 +31,18 @@ const RegisterPage = () => {
           const user = result.user;
           setUser(user);
           console.log(user);
-          navigate("/"); // Navigate to the home page after registration
+          updateUserProfile({
+            displayName: name,
+            photoURL: photo,
+          })
+            .then(() => {
+              console.log("User profile updated successfully");
+              navigate("/"); // Navigate to the home page after registration
+            })
+            .catch((err) => {
+              console.error("Error updating user profile:", err);
+              setErrorMessage(err.message);
+            });
         })
         .catch((error) => {
           console.error(

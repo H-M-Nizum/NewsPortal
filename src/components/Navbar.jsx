@@ -25,7 +25,15 @@ const Navbar = () => {
       </div>
       <div className="login flex items-center gap-2">
         <div className="">
-          <img src={userIcon} alt="userIcon" />
+          {user ? (
+            <img
+              className="w-10 h-10 rounded-full"
+              src={user?.photoURL}
+              alt="userIcon"
+            />
+          ) : (
+            <img src={userIcon} alt="userIcon" />
+          )}
         </div>
         {user ? (
           <button onClick={handelSignout} className="btn btn-error">
