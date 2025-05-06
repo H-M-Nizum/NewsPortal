@@ -1,9 +1,11 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { Link } from "react-router";
 import { AuthContext } from "../provider/AuthProvider";
 
 const LoginPage = () => {
   const { signUser } = useContext(AuthContext);
+  // Show error message
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handelLoginForm = (e) => {
     e.preventDefault();
@@ -21,6 +23,7 @@ const LoginPage = () => {
       })
       .catch((error) => {
         console.error("Error signing in:", error.code, " : ", error.message);
+        setErrorMessage(error.message);
       });
   };
   return (
@@ -51,6 +54,7 @@ const LoginPage = () => {
             <div>
               <a className="link link-hover">Forgot password?</a>
             </div>
+            <div className="error-message text-red-600">{errorMessage}</div>
             <button className="btn btn-neutral mt-4">Login</button>
             <p className="text-center pt-2">
               Don't Have An Account?{" "}

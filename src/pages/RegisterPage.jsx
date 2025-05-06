@@ -1,8 +1,11 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../provider/AuthProvider";
 
 const RegisterPage = () => {
   const { createUser, setUser } = useContext(AuthContext);
+  // Show error message
+  const [errorMessage, setErrorMessage] = useState("");
+
   const handelRegisterForm = (e) => {
     e.preventDefault();
     // Get form data
@@ -15,15 +18,25 @@ const RegisterPage = () => {
     console.log(user);
 
     // Call createUser function from AuthProvider
-    createUser(email, password)
-      .then((result) => {
-        const user = result.user;
-        setUser(user);
-        console.log(user);
-      })
-      .catch((error) => {
-        console.error("Error creating user:", error.code, " : ", error.message);
-      });
+    if (!ckeckbox) {
+      setErrorMessage("Please accept terms and conditions");
+    } else {
+      createUser(email, password)
+        .then((result) => {
+          const user = result.user;
+          setUser(user);
+          console.log(user);
+        })
+        .catch((error) => {
+          console.error(
+            "Error creating user:",
+            error.code,
+            " : ",
+            error.message
+          );
+          setErrorMessage(error.message);
+        });
+    }
   };
   return (
     <div className="min-h-screen flex justify-center items-center">
@@ -76,7 +89,7 @@ const RegisterPage = () => {
               />
               <p>Accept Trems & Conditions</p>
             </div>
-
+            <div className="error-message text-red-600">{errorMessage}</div>
             <button className="btn btn-neutral mt-4">Register</button>
           </form>
         </div>
