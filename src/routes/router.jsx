@@ -4,6 +4,7 @@ import CategoryNews from "../pages/CategoryNews";
 import AuthLayout from "../layout/AuthLayout";
 import LoginPage from "../pages/LoginPage";
 import RegisterPage from "../pages/RegisterPage";
+import NewsDetails from "../pages/NewsDetails";
 
 const router = createBrowserRouter([
   {
@@ -28,8 +29,15 @@ const router = createBrowserRouter([
     ],
   },
   {
-    path: "/news",
-    element: <div>News Layout</div>,
+    path: "/news/:id",
+    element: <NewsDetails></NewsDetails>,
+    loader: async ({ params }) => {
+      const res = await fetch(
+        `https://openapi.programming-hero.com/api/news/${params.id}`
+      );
+      const data = await res.json();
+      return data;
+    },
   },
   {
     path: "/auth",

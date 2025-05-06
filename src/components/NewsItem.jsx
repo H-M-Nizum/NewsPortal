@@ -1,15 +1,12 @@
-import { useState } from "react";
 import { CiBookmark, CiShare2 } from "react-icons/ci";
 import { FaEye, FaStar } from "react-icons/fa";
+import { Link } from "react-router";
 
 const NewsItem = ({ singleNews }) => {
-  const [showMore, setShowMore] = useState(false);
-
   const getShortText = (text) => {
     return text?.split(" ").slice(0, 30).join(" ") + "...";
   };
 
-  const toggleText = () => setShowMore(!showMore);
   return (
     <div className="mb-5  rounded-lg shadow-lg">
       <div className="flex justify-between items-center p-4 bg-base-300 rounded-t-lg">
@@ -34,17 +31,15 @@ const NewsItem = ({ singleNews }) => {
         </div>
       </div>
       <div className="p-4">
-        <h2 className="font-semibold">{singleNews?.title}</h2>
+        <h2 className="font-semibold pb-2">{singleNews?.title}</h2>
         <div>
           <img className="w-full" src={singleNews?.image_url} alt="" />
         </div>
         {/* <p>{singleNews?.details}</p> */}
-        <p className="mt-3">
-          {showMore ? singleNews?.details : getShortText(singleNews?.details)}
-        </p>
-        <button onClick={toggleText} className="text-blue-500 mt-2">
-          {showMore ? "Show less" : "Show more"}
-        </button>
+        <p className="mt-3">{getShortText(singleNews?.details)}</p>
+        <Link to={`/news/${singleNews._id}`} className="text-blue-500 mt-2">
+          Show more
+        </Link>
         <hr className="my-4" />
         <div className="flex justify-between items-center">
           <div className="flex items-center gap-3">
