@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { Link } from "react-router";
+import { Link, Navigate, useLocation, useNavigate } from "react-router";
 import { AuthContext } from "../provider/AuthProvider";
 
 const LoginPage = () => {
@@ -7,6 +7,11 @@ const LoginPage = () => {
   // Show error message
   const [errorMessage, setErrorMessage] = useState("");
 
+  // navigate to previous page or home page after login
+  const navigate = useNavigate();
+
+  const location = useLocation();
+  console.log(location);
   const handelLoginForm = (e) => {
     e.preventDefault();
     // Get form data
@@ -20,6 +25,7 @@ const LoginPage = () => {
       .then((result) => {
         const user = result.user;
         console.log(user);
+        navigate(location?.state || "/"); // Navigate to the previous page or home page
       })
       .catch((error) => {
         console.error("Error signing in:", error.code, " : ", error.message);

@@ -1,10 +1,14 @@
 import { useContext, useState } from "react";
 import { AuthContext } from "../provider/AuthProvider";
+import { useNavigate } from "react-router";
 
 const RegisterPage = () => {
   const { createUser, setUser } = useContext(AuthContext);
   // Show error message
   const [errorMessage, setErrorMessage] = useState("");
+
+  // Navigate to home page after Register
+  const navigate = useNavigate();
 
   const handelRegisterForm = (e) => {
     e.preventDefault();
@@ -20,12 +24,14 @@ const RegisterPage = () => {
     // Call createUser function from AuthProvider
     if (!ckeckbox) {
       setErrorMessage("Please accept terms and conditions");
+      return;
     } else {
       createUser(email, password)
         .then((result) => {
           const user = result.user;
           setUser(user);
           console.log(user);
+          navigate("/"); // Navigate to the home page after registration
         })
         .catch((error) => {
           console.error(

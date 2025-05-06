@@ -15,16 +15,19 @@ const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   // Function for Signup using email and password
   const createUser = (email, password) => {
+    setLoading(true);
     return createUserWithEmailAndPassword(auth, email, password);
   };
 
   // Function for login using email and password
   const signUser = (email, password) => {
+    setLoading(true);
     return signInWithEmailAndPassword(auth, email, password);
   };
 
   // Function for signout
   const signoutUser = () => {
+    setLoading(true);
     return signOut(auth);
   };
   // Create Context value
